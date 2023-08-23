@@ -54,7 +54,8 @@ const userSchema = new mongoose.Schema({
         type: Buffer
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {virtuals: true}
 })
 
 userSchema.virtual('tasks', {

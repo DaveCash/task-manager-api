@@ -34,18 +34,22 @@ router.get('/tasks', auth, async (req, res) => {
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1 
     }
 
+    console.log(parseInt(req.query.skip))
+    console.log(req.query.skip === undefined ? 0 : parseInt(req.query.skip))
+
     try {
         await req.user.populate({
             path: 'tasks',
             match,
             options: {
-                limit: parseInt( req.query.limit),
-                skip: parseInt(req.query.skip),
+                limit: req.query.limit === undefined ? 0 : parseInt(req.query.limit),
+                skip: req.query.skip === undefined ? 0 : parseInt(req.query.skip),
                 sort
             }
-        }).execPopulate()
+        })
         res.send(req.user.tasks)
     } catch (e) {  
+        console.log(e)
         res.status(500).send(e)
     }
 })
