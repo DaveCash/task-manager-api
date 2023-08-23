@@ -83,8 +83,6 @@ userSchema.methods.toJSON = function () {
     delete userObject.tokens
     delete userObject.avatar
 
-    console.log(userObject)
-
     return userObject
 }
 
@@ -116,7 +114,7 @@ userSchema.pre('save', async function (next) {
 })
 
 // Delete user tasks when user is removed
-userSchema.pre('remove', async function (next) {
+userSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
     const user = this
     await Task.deleteMany({ owner: user._id})
     next()
