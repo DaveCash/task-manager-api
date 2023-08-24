@@ -14,7 +14,7 @@ const sendWelcomeEmail = (email, name) => {
 	}
 	
 	mg.messages().send(data, function (error, body) {
-		console.log(body);
+		// console.log(body);
 	})
 }
 
@@ -27,7 +27,7 @@ const sendCancelEmail = (email, name) => {
 	}
 	
 	mg.messages().send(data, function (error, body) {
-		console.log(body);
+		// console.log(body);
 	})
 }
 
